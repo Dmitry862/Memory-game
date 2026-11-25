@@ -31,7 +31,8 @@ function createElement(tag, parent, classlist = null, text = '') {
 createElement('div', 'body', 'wrapper');
 createElement('div', 'div.wrapper', 'cardPlace');
 const modalWindow = createElement('div', 'div.wrapper', 'modal');
-const winMessage = createElement('p', 'div.wrapper', 'winMessage');
+const closeButton = createElement('button', '.modal', 'close_btn');
+const winMessage = createElement('p', 'div.wrapper', 'win_message');
 const levelSelect = createElement('select', '.wrapper', 'level');
 const easyOption = createElement('option', 'select.level', null, 'Легкий');
 easyOption.value = 4;
