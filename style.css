@@ -23,36 +23,54 @@ body {
 }
 .cardPlace {
   margin-top: 50px;
-  width: 700px;
+  width: 708px;
 }
 .easy {
-  width: 700px;
+  width: 708px;
 }
 .medium {
   width: 715px;
 }
 .hard {
-  width: 1050px;
+  width: 1062px;
 }
 
 .BTN {
+  border-radius: 15px;
   width: 175px;
   height: 150px;
   cursor: pointer;
   transition: transform 0.3s ease;
   font-size: 50px;
+  margin: 1px;
 }
 
 .BTN:hover {
   transform: scale(1.2);
 }
-.moves {
+.moves_container {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: wheat;
+  border-radius: 15px;
   margin-top: 50px;
   margin-bottom: 50px;
+}
+.moves {
   font-size: 20px;
 }
 .winMessage {
   font-size: 150px;
   font-style: italic;
   color: brown;
+}
+.modal {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  background-color: aqua;
+  display: none;
 }

@@ -30,6 +30,7 @@ function createElement(tag, parent, classlist = null, text = '') {
 // создание элементов
 createElement('div', 'body', 'wrapper');
 createElement('div', 'div.wrapper', 'cardPlace');
+const modalWindow = createElement('div', 'div.wrapper', 'modal');
 const winMessage = createElement('p', 'div.wrapper', 'winMessage');
 const levelSelect = createElement('select', '.wrapper', 'level');
 const easyOption = createElement('option', 'select.level', null, 'Легкий');
@@ -38,7 +39,13 @@ const mediumOption = createElement('option', 'select.level', null, 'Средни
 mediumOption.value = 8;
 const hardOption = createElement('option', 'select.level', null, 'Сложный');
 hardOption.value = 12;
-
+createElement('div', '.wrapper', 'moves_container');
+const movesElement = createElement(
+  'p',
+  '.moves_container',
+  'moves',
+  `Количество ходов: ${moves}`,
+);
 //выбор уровня сложности
 
 levelSelect.addEventListener('change', (e) => {
@@ -116,13 +123,6 @@ function showAllCards() {
     isLocked = false;
   }, 3000);
 }
-
-const movesElement = createElement(
-  'p',
-  'div.wrapper',
-  'moves',
-  `Количество ходов: ${moves}`,
-);
 
 //функция обработчик событий клик на доску с карточками
 function handleCardClick(event) {
