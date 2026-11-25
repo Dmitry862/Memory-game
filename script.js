@@ -40,6 +40,7 @@ const hardOption = createElement('option', 'select.level', null, 'Сложный
 hardOption.value = 12;
 
 //выбор уровня сложности
+
 levelSelect.addEventListener('change', (e) => {
   pairsCount = Number(e.target.value);
   cards.classList.remove('easy', 'medium', 'hard');

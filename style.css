@@ -2,15 +2,16 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 body {
   background-color: rgb(43, 236, 172);
 }
 .wrapper {
-  margin: 0 auto;
   max-width: 1440px;
   display: flex;
   flex-direction: column-reverse;
+  margin: 0 auto;
 }
 .level {
   width: 100px;
@@ -21,37 +22,37 @@ body {
   text-align-last: center;
 }
 .cardPlace {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin: 0 auto;
-  padding: 100px 0;
-  min-height: 100vh;
-  grid-auto-flow: row;
+  margin-top: 50px;
+  width: 700px;
 }
 .easy {
-  grid-template-columns: repeat(4, 1fr);
+  width: 700px;
 }
 .medium {
-  grid-template-columns: repeat(4, 1fr);
+  width: 715px;
 }
 .hard {
-  grid-template-columns: repeat(6, 1fr);
+  width: 1050px;
 }
 
 .BTN {
-  width: 100px;
-  height: 125px;
+  width: 175px;
+  height: 150px;
   cursor: pointer;
   transition: transform 0.3s ease;
   font-size: 50px;
 }
+
 .BTN:hover {
   transform: scale(1.2);
 }
 .moves {
+  margin-top: 50px;
+  margin-bottom: 50px;
   font-size: 20px;
 }
 .winMessage {
-  font-size: 30px;
+  font-size: 150px;
+  font-style: italic;
+  color: brown;
 }
