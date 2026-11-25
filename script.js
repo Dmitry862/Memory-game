@@ -48,6 +48,9 @@ const movesElement = createElement(
   'moves',
   `Количество ходов: ${moves}`,
 );
+
+//содержимое модальное окно
+
 //выбор уровня сложности
 
 levelSelect.addEventListener('change', (e) => {
@@ -65,18 +68,18 @@ levelSelect.addEventListener('change', (e) => {
 
 //функция создание карточек
 const arrayOfUniqCards = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
+  'cat.jpg',
+  'r3tig.jpg',
+  'r3tm_Ksusha.jpg',
+  'r3tm.jpg',
+  'r3tw.jpg',
+  'r3tzl.jpg',
+  'rc3t.jpg',
+  'rj3t.jpg',
+  'rk3tt.jpg',
+  'ru3t.jpg',
+  'rw3tn_u3t_tig_j3t_tfg.jpg',
+  'rw3tn.jpg',
 ];
 const gameCards = [];
 
@@ -98,7 +101,9 @@ function createGameCards() {
     cards.appendChild(card);
     const cardBack = createElement('div', card, 'card-back');
     const cardFront = createElement('div', card, 'card-front');
-    console.log(cardFront, cardBack);
+    const frontImage = document.createElement('img');
+    frontImage.src = `/images/friends/${symbol}`;
+    cardFront.appendChild(frontImage);
   });
   return;
 }
