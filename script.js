@@ -51,14 +51,14 @@ const movesElement = createElement(
 
 levelSelect.addEventListener('change', (e) => {
   pairsCount = Number(e.target.value);
-  cards.classList.remove('easy', 'medium', 'hard');
-  if (pairsCount === 4) {
-    cards.classList.add('easy');
-  } else if (pairsCount === 8) {
-    cards.classList.add('medium');
-  } else if (pairsCount === 12) {
-    cards.classList.add('hard');
+  if (pairsCount === 12) {
+    cards.style.gridTemplateColumns = 'repeat(6,1fr)';
+    cards.style.maxWidth = '1062px';
+  } else {
+    cards.style.gridTemplateColumns = 'repeat(4,1fr)';
+    cards.style.maxWidth = '708px';
   }
+
   resetGame();
 });
 
@@ -154,7 +154,7 @@ function openCard(card) {
 
 //функция закрытия карточек
 function closeCard(card) {
-  card.textContent = '?';
+  card.textContent = '';
   card.classList.remove('opened');
 }
 
