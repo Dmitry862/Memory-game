@@ -17,7 +17,8 @@ function createElement(tag, parent, classlist = null, text = '') {
     newElement.classList.add(classlist);
   }
   newElement.textContent = text;
-  const parentElemen = document.querySelector(parent);
+  const parentElemen =
+    typeof parent === 'string' ? document.querySelector(parent) : parent;
   if (!parentElemen) {
     console.warn(`Родительский элемент "${parent}" не найден`);
     return null;
@@ -95,6 +96,9 @@ function createGameCards() {
     card.dataset.symbol = symbol;
     card.classList.add('BTN');
     cards.appendChild(card);
+    const cardBack = createElement('div', card, 'card-back');
+    const cardFront = createElement('div', card, 'card-front');
+    console.log(cardFront, cardBack);
   });
   return;
 }
@@ -148,13 +152,12 @@ cards.addEventListener('click', handleCardClick);
 
 //функция открытия карточки
 function openCard(card) {
-  card.textContent = card.dataset.symbol;
   card.classList.add('opened');
+  const front = card.querySelector('.card-front');
 }
 
 //функция закрытия карточек
 function closeCard(card) {
-  card.textContent = '';
   card.classList.remove('opened');
 }
 
