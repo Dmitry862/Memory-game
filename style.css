@@ -5,7 +5,7 @@
   margin: 0 auto;
 }
 body {
-  background-color: rgb(43, 236, 172);
+  background-image: url(./images/QSL.jpeg);
 }
 .wrapper {
   max-width: 1440px;
