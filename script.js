@@ -102,7 +102,8 @@ function createGameCards() {
     const cardBack = createElement('div', card, 'card-back');
     const cardFront = createElement('div', card, 'card-front');
     const frontImage = document.createElement('img');
-    frontImage.src = `/images/friends/${symbol}`;
+    frontImage.src = `./images/friends/${symbol}`;
+    console.log(frontImage.src);
     cardFront.appendChild(frontImage);
   });
   return;
