@@ -17,7 +17,8 @@ function createElement(tag, parent, classlist = null, text = '') {
     newElement.classList.add(classlist);
   }
   newElement.textContent = text;
-  const parentElemen = document.querySelector(parent);
+  const parentElemen =
+    typeof parent === 'string' ? document.querySelector(parent) : parent;
   if (!parentElemen) {
     console.warn(`Родительский элемент "${parent}" не найден`);
     return null;
@@ -30,7 +31,9 @@ function createElement(tag, parent, classlist = null, text = '') {
 // создание элементов
 createElement('div', 'body', 'wrapper');
 createElement('div', 'div.wrapper', 'cardPlace');
-const winMessage = createElement('p', 'div.wrapper', 'winMessage');
+const modalWindow = createElement('div', 'div.wrapper', 'modal');
+const closeButton = createElement('button', '.modal', 'close_btn');
+const winMessage = createElement('p', 'div.wrapper', 'win_message');
 const levelSelect = createElement('select', '.wrapper', 'level');
 const easyOption = createElement('option', 'select.level', null, 'Легкий');
 easyOption.value = 4;
@@ -38,35 +41,45 @@ const mediumOption = createElement('option', 'select.level', null, 'Средни
 mediumOption.value = 8;
 const hardOption = createElement('option', 'select.level', null, 'Сложный');
 hardOption.value = 12;
+createElement('div', '.wrapper', 'moves_container');
+const movesElement = createElement(
+  'p',
+  '.moves_container',
+  'moves',
+  `Количество ходов: ${moves}`,
+);
+
+//содержимое модальное окно
 
 //выбор уровня сложности
+
 levelSelect.addEventListener('change', (e) => {
   pairsCount = Number(e.target.value);
-  cards.classList.remove('easy', 'medium', 'hard');
-  if (pairsCount === 4) {
-    cards.classList.add('easy');
-  } else if (pairsCount === 8) {
-    cards.classList.add('medium');
-  } else if (pairsCount === 12) {
-    cards.classList.add('hard');
+  if (pairsCount === 12) {
+    cards.style.gridTemplateColumns = 'repeat(6,1fr)';
+    cards.style.maxWidth = '1062px';
+  } else {
+    cards.style.gridTemplateColumns = 'repeat(4,1fr)';
+    cards.style.maxWidth = '708px';
   }
+
   resetGame();
 });
 
 //функция создание карточек
 const arrayOfUniqCards = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
+  'cat.jpg',
+  'r3tig.jpg',
+  'r3tm_Ksusha.jpg',
+  'r3tm.jpg',
+  'r3tw.jpg',
+  'r3tzl.jpg',
+  'rc3t.jpg',
+  'rj3t.jpg',
+  'rk3tt.jpg',
+  'ru3t.jpg',
+  'rw3tn_u3t_tig_j3t_tfg.jpg',
+  'rw3tn.jpg',
 ];
 const gameCards = [];
 
@@ -86,6 +99,11 @@ function createGameCards() {
     card.dataset.symbol = symbol;
     card.classList.add('BTN');
     cards.appendChild(card);
+    const cardBack = createElement('div', card, 'card-back');
+    const cardFront = createElement('div', card, 'card-front');
+    const frontImage = document.createElement('img');
+    frontImage.src = `/images/friends/${symbol}`;
+    cardFront.appendChild(frontImage);
   });
   return;
 }
@@ -116,13 +134,6 @@ function showAllCards() {
   }, 3000);
 }
 
-const movesElement = createElement(
-  'p',
-  'div.wrapper',
-  'moves',
-  `Количество ходов: ${moves}`,
-);
-
 //функция обработчик событий клик на доску с карточками
 function handleCardClick(event) {
   const card = event.target.closest('.BTN');
@@ -146,13 +157,12 @@ cards.addEventListener('click', handleCardClick);
 
 //функция открытия карточки
 function openCard(card) {
-  card.textContent = card.dataset.symbol;
   card.classList.add('opened');
+  const front = card.querySelector('.card-front');
 }
 
 //функция закрытия карточек
 function closeCard(card) {
-  card.textContent = '?';
   card.classList.remove('opened');
 }
 
