@@ -9,6 +9,7 @@ let firstCard = null,
   pairsCount = 4;
 const FLIP_DELAY = 800;
 
+//функция создания элемента
 function createElement(tag, parent, classlist = null, text = '') {
   const newElement = document.createElement(tag);
   if (Array.isArray(classlist)) {
@@ -44,20 +45,27 @@ const winTitle = createElement('p', '.win_content', 'win_title');
 const winMessage = createElement('p', '.win_content', 'win_message');
 const winByeMessage = createElement('p', '.win_content', 'win_bye_message');
 const winButton = createElement('p', '.win_content', 'win_btn');
-const levelSelect = createElement('select', '.wrapper', 'level');
-const easyOption = createElement('option', 'select.level', null, 'Легкий');
+const gameInfo = createElement('div', '.wrapper', 'game_info');
+const levelSelect = createElement('select', '.game_info', 'level');
+const easyOption = createElement('option', 'select.level', null, '1й разряд');
 easyOption.value = 4;
-const mediumOption = createElement('option', 'select.level', null, 'Средний');
+const mediumOption = createElement('option', 'select.level', null, 'КМС');
 mediumOption.value = 8;
-const hardOption = createElement('option', 'select.level', null, 'Сложный');
+const hardOption = createElement('option', 'select.level', null, 'МС');
 hardOption.value = 12;
-createElement('div', '.wrapper', 'moves_container');
+// createElement('div', '.game_info', 'moves_container');
 const movesElement = createElement(
   'p',
-  '.moves_container',
+  '.game_info',
   'moves',
   `Количество ходов: ${moves}`,
 );
+
+// звуковые эффекты
+const cardClickSound = new Audio('./sound/card_click.wav');
+const rogerSound = new Audio('./sound/r.wav');
+const confirmSound = new Audio('./sound/cfm.wav');
+const backgroundMusic = new Audio('./sound/bg-music.mp3');
 
 //содержимое модального окна
 modalTitle.textContent = 'Привет, Друзья!';
@@ -80,6 +88,12 @@ winButton.textContent = 'Сыграем еще раз?';
 modalWindow.style.display = 'flex';
 startButton.addEventListener('click', (e) => {
   modalWindow.style.display = 'none';
+  if (backgroundMusic.paused) {
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.loop = true;
+    backgroundMusic.volume = 0.15;
+    backgroundMusic.play();
+  }
 });
 winButton.addEventListener('click', (e) => {
   winWindow.style.display = 'none';
@@ -137,7 +151,6 @@ function createGameCards() {
     const cardFront = createElement('div', card, 'card-front');
     const frontImage = document.createElement('img');
     frontImage.src = `./images/friends/${symbol}`;
-    console.log(frontImage.src);
     cardFront.appendChild(frontImage);
   });
   return;
@@ -178,6 +191,9 @@ function handleCardClick(event) {
   if (card === firstCard) return;
   if (isLocked) return;
   if (isGameOver) return;
+  cardClickSound.currentTime = 0;
+  cardClickSound.volume = 0.7;
+  cardClickSound.play();
   openCard(card);
   if (firstCard === null) {
     firstCard = card;
@@ -185,7 +201,6 @@ function handleCardClick(event) {
     secondCard = card;
     moves++;
     movesElement.textContent = `Количество ходов: ${moves}`;
-    console.log(moves);
     checkMatch();
   }
 }
@@ -214,8 +229,13 @@ function checkMatch() {
       secondCard = null;
       isLocked = false;
       if (matched === pairsCount) {
+        confirmSound.currentTime = 0;
+        confirmSound.play();
         isGameOver = true;
         winWindow.style.display = 'flex';
+      } else {
+        rogerSound.currentTime = 0;
+        rogerSound.play();
       }
     } else {
       timerId();
