@@ -38,7 +38,12 @@ const modalMemoryText = createElement('p', '.modal_content', 'memory_text');
 const modalText = createElement('p', '.modal_content', 'modal_content_text');
 const modalSignOff = createElement('p', '.modal_content', 'sign_off');
 const startButton = createElement('button', '.modal_content', 'start_btn');
-const winMessage = createElement('p', 'div.wrapper', 'win_message');
+const winWindow = createElement('div', 'div.wrapper', 'win_window');
+const winContent = createElement('div', '.win_window', 'win_content');
+const winTitle = createElement('p', '.win_content', 'win_title');
+const winMessage = createElement('p', '.win_content', 'win_message');
+const winByeMessage = createElement('p', '.win_content', 'win_bye_message');
+const winButton = createElement('p', '.win_content', 'win_btn');
 const levelSelect = createElement('select', '.wrapper', 'level');
 const easyOption = createElement('option', 'select.level', null, 'Легкий');
 easyOption.value = 4;
@@ -60,11 +65,24 @@ modalMemoryText.textContent =
   'Помните наши поездки на RK3T! Долгие разговоры, азарт охоты за дальними корреспондентами, крики и стуки по клавиатуре во время CONTESTов, голоса в эфире и незабываемые моменты, которые нас объединяли.С тех пор прошло много времени, но хорошие воспоминания остаются с нами.';
 modalText.textContent =
   'Эта небольшая игра - повод снова встретиься, пусть даже виртуально, вспомнить те дни и улыбнуться.';
-modalSignOff.textContent = '73! До встречи! И в эфире тоже ;-)';
+modalSignOff.textContent = 'Удачи в игре и приятных воспоминаний!';
 startButton.textContent = 'Вспомним те времена';
+
+//содержимое окна win
+winTitle.textContent = 'You Win!';
+winMessage.textContent =
+  'Отличная работа! Поздравляю! Все пары найдены! Память не подвела. Как и в эфире здесь важны терпение, внимание и немного удачи. Здорово, что мы снова встретились, пусть и за карточной игрой. ';
+winByeMessage.textContent =
+  'Ну а если все уровни пройдены или просто надоели рожи на фото, то 73!Удачи!Пока ;-)';
+winButton.textContent = 'Сыграем еще раз?';
+
+// клик на кнопке начала и конца игры
 modalWindow.style.display = 'flex';
-modalWindow.addEventListener('click', (e) => {
+startButton.addEventListener('click', (e) => {
   modalWindow.style.display = 'none';
+});
+winButton.addEventListener('click', (e) => {
+  winWindow.style.display = 'none';
 });
 
 //выбор уровня сложности
@@ -137,6 +155,7 @@ function shuffle(array) {
 createGameCards();
 showAllCards();
 
+//функция показа всех карточек
 function showAllCards() {
   const allCards = cards.querySelectorAll('.BTN');
   isLocked = true;
@@ -196,7 +215,7 @@ function checkMatch() {
       isLocked = false;
       if (matched === pairsCount) {
         isGameOver = true;
-        winMessage.textContent = 'You Win!';
+        winWindow.style.display = 'flex';
       }
     } else {
       timerId();
