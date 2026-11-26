@@ -49,11 +49,20 @@ const gameInfo = createElement('div', '.wrapper', 'game_info');
 const levelSelect = createElement('select', '.game_info', 'level');
 const easyOption = createElement('option', 'select.level', null, '1й разряд');
 easyOption.value = 4;
-const mediumOption = createElement('option', 'select.level', null, 'КМС');
+const mediumOption = createElement(
+  'option',
+  'select.level',
+  null,
+  'Кандидат в мастера спорта',
+);
 mediumOption.value = 8;
-const hardOption = createElement('option', 'select.level', null, 'МС');
+const hardOption = createElement(
+  'option',
+  'select.level',
+  null,
+  'Мастер спорта',
+);
 hardOption.value = 12;
-// createElement('div', '.game_info', 'moves_container');
 const movesElement = createElement(
   'p',
   '.game_info',
@@ -70,7 +79,7 @@ const backgroundMusic = new Audio('./sound/bg-music.mp3');
 //содержимое модального окна
 modalTitle.textContent = 'Привет, Друзья!';
 modalMemoryText.textContent =
-  'Помните наши поездки на RK3T! Долгие разговоры, азарт охоты за дальними корреспондентами, крики и стуки по клавиатуре во время CONTESTов, голоса в эфире и незабываемые моменты, которые нас объединяли.С тех пор прошло много времени, но хорошие воспоминания остаются с нами.';
+  'Помните наши поездки на RK3T ! Долгие разговоры, азарт охоты за дальними корреспондентами, крики и стуки по клавиатуре во время CONTESTов, голоса в эфире и незабываемые моменты, которые нас объединяли.С тех пор прошло много времени, но хорошие воспоминания остаются с нами.';
 modalText.textContent =
   'Эта небольшая игра - повод снова встретиься, пусть даже виртуально, вспомнить те дни и улыбнуться.';
 modalSignOff.textContent = 'Удачи в игре и приятных воспоминаний!';
@@ -100,7 +109,6 @@ winButton.addEventListener('click', (e) => {
 });
 
 //выбор уровня сложности
-
 levelSelect.addEventListener('change', (e) => {
   pairsCount = Number(e.target.value);
   if (pairsCount === 12) {
@@ -269,6 +277,5 @@ function resetGame() {
   console.log(gameCards);
   console.log(cards);
   console.log(cards.children.length);
-  winMessage.textContent = '';
   showAllCards();
 }
