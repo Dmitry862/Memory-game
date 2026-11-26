@@ -32,7 +32,12 @@ function createElement(tag, parent, classlist = null, text = '') {
 createElement('div', 'body', 'wrapper');
 createElement('div', 'div.wrapper', 'cardPlace');
 const modalWindow = createElement('div', 'div.wrapper', 'modal');
-const closeButton = createElement('button', '.modal', 'close_btn');
+const modalContent = createElement('div', '.modal', 'modal_content');
+const modalTitle = createElement('p', '.modal_content', 'title_text');
+const modalMemoryText = createElement('p', '.modal_content', 'memory_text');
+const modalText = createElement('p', '.modal_content', 'modal_content_text');
+const modalSignOff = createElement('p', '.modal_content', 'sign_off');
+const startButton = createElement('button', '.modal_content', 'start_btn');
 const winMessage = createElement('p', 'div.wrapper', 'win_message');
 const levelSelect = createElement('select', '.wrapper', 'level');
 const easyOption = createElement('option', 'select.level', null, 'Легкий');
@@ -49,7 +54,18 @@ const movesElement = createElement(
   `Количество ходов: ${moves}`,
 );
 
-//содержимое модальное окно
+//содержимое модального окна
+modalTitle.textContent = 'Привет, Друзья!';
+modalMemoryText.textContent =
+  'Помните наши поездки на RK3T! Долгие разговоры, азарт охоты за дальними корреспондентами, крики и стуки по клавиатуре во время CONTESTов, голоса в эфире и незабываемые моменты, которые нас объединяли.С тех пор прошло много времени, но хорошие воспоминания остаются с нами.';
+modalText.textContent =
+  'Эта небольшая игра - повод снова встретиься, пусть даже виртуально, вспомнить те дни и улыбнуться.';
+modalSignOff.textContent = '73! До встречи! И в эфире тоже ;-)';
+startButton.textContent = 'Вспомним те времена';
+modalWindow.style.display = 'flex';
+modalWindow.addEventListener('click', (e) => {
+  modalWindow.style.display = 'none';
+});
 
 //выбор уровня сложности
 
