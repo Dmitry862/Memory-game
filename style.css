@@ -113,13 +113,16 @@ body::before {
   align-items: center;
 }
 .modal_content {
-  max-width: 650px;
+  max-width: 850px;
   width: 70%;
   background-color: #f2ebdd;
   border-radius: 15px;
   padding: 30px;
   transform: scale(0.95);
   transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 .start_btn {
   background-color: #263b52;
@@ -169,4 +172,30 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.title_text {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  padding: 1rem;
+  color: brown;
+}
+.memory_text {
+  display: flex;
+  text-indent: 2rem;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.modal_content_text {
+  display: flex;
+  text-indent: 2rem;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.sign_off {
+  display: flex;
+  justify-content: center;
+  font-size: 1.75rem;
+  padding: 1rem;
 }
